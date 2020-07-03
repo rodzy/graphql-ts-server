@@ -1,0 +1,15 @@
+{
+  "name": "typegraphql-api",
+  "version": "1.0.0",
+  "description": "A TypeGraphQL server",
+  "main": "index.js",
+  "author": "rodzy",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server-express": "^2.15.1",
+    "express": "^4.17.1",
+    "graphql": "^15.2.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.3"
+  }
+}
