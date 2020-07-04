@@ -3,8 +3,7 @@ import { ApolloServer } from "apollo-server-express";
 import * as Express from "express";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-import { FromResolver } from './modules/user/Register';
-
+import { FromResolver } from "./modules/user/Register";
 
 const main = async () => {
   await createConnection();
@@ -15,7 +14,7 @@ const main = async () => {
   const app = Express();
   apolloServer.applyMiddleware({ app });
   app.listen(4000, () => {
-    console.log("running on http://localhost:4000");
+    console.log("running on http://localhost:4000/graphql");
   });
 };
 
