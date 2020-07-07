@@ -8,19 +8,23 @@ import cors from "cors";
 import session from "express-session";
 import { FromResolver } from "./modules/user/Register";
 import { redis } from "./redis";
-import { LoginResolver } from './modules/user/Login';
-import { MeResolver } from './modules/user/Me';
-
+import { LoginResolver } from "./modules/user/Login";
+import { MeResolver } from "./modules/user/Me";
+import { LogoutResolver } from "./modules/user/Logout";
 
 
 const main = async () => {
   await createConnection();
   const schema = await buildSchema({
-    resolvers: [FromResolver, LoginResolver, MeResolver],
+    resolvers: [FromResolver, LoginResolver, MeResolver, LogoutResolver],
+    authChecker: ({ context: { req } }) => {
+      // Authentication
+      return !!req.session.userId;
+    },
   });
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req }: any) => ({ req }),
+    context: ({ req,res }: any) => ({ req,res }),
   });
   const app = Express();
   app.use(
@@ -29,16 +33,16 @@ const main = async () => {
       // Origin the FrontEnd server
       origin: "http://localhost:3000",
     })
-    );
-    
+  );
+
   const RedisStore = connectRedis(session);
-    
+
   app.use(
     session({
       store: new RedisStore({
         client: redis as any,
       }),
-      name: "sessionID",
+      name: "qID",
       secret: "pksapkelsks12232",
       resave: false,
       saveUninitialized: false,
