@@ -23,6 +23,10 @@ export class LoginResolver {
       return null;
     }
 
+    if(!user.confirmed){
+      return null;
+    }
+
     // Saving the user id to the cookie context for the session
     ctx.req.session!.userid = user.id;
     return user;

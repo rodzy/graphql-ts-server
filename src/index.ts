@@ -11,9 +11,11 @@ import { redis } from "./redis";
 import { LoginResolver } from "./modules/user/Login";
 import { MeResolver } from "./modules/user/Me";
 import { LogoutResolver } from "./modules/user/Logout";
+import { sendEmail } from "./utils/sendEmail";
 
 
 const main = async () => {
+  await sendEmail();
   await createConnection();
   const schema = await buildSchema({
     resolvers: [FromResolver, LoginResolver, MeResolver, LogoutResolver],

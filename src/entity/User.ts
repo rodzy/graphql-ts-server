@@ -4,7 +4,7 @@ import { ObjectType, Field, ID } from "type-graphql";
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
-  @Field(()=>ID)
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
   @Field()
@@ -20,6 +20,8 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
+  @Column("bool", { default: false })
+  confirmed: boolean;
 }
 
 // Base entity used for operations with the user entity
