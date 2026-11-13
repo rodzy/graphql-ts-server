@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
 import { buildSchema } from "type-graphql";
-import { createConnection } from "typeorm";
 import connectRedis from "connect-redis";
 import cors from "cors";
 import session from "express-session";
@@ -12,11 +11,12 @@ import { LoginResolver } from "./modules/user/Login";
 import { MeResolver } from "./modules/user/Me";
 import { LogoutResolver } from "./modules/user/Logout";
 import { sendEmail } from "./utils/sendEmail";
+import { AppDataSource } from "./data-source";
 
 
 const main = async () => {
   await sendEmail();
-  await createConnection();
+  await AppDataSource.initialize();
   const schema = await buildSchema({
     resolvers: [FromResolver, LoginResolver, MeResolver, LogoutResolver],
     authChecker: ({ context: { req } }) => {
