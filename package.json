@@ -9,7 +9,7 @@
     "@types/bcryptjs": "^2.4.2",
     "apollo-server-express": "^2.15.1",
     "bcryptjs": "^2.4.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "0.14.1",
     "connect-redis": "^4.0.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -63,7 +63,9 @@
     "strip-ansi@5.2.0/ansi-regex": "4.1.1",
     "strip-ansi@6.0.0/ansi-regex": "5.0.1",
     "@types/fs-capacitor": "2.0.0",
-    "@types/graphql-upload": "8.0.3"
+    "@types/graphql-upload": "8.0.3",
+    "validator": "13.15.22",
+    "libphonenumber-js": "1.11.1"
   },
   "devDependencies": {
     "@types/connect-redis": "^0.0.14",
